@@ -1,0 +1,342 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('./assets/home_jeweller_bg.jpg') no-repeat fixed center;
+}
+
+.header{
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #626262;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: normal;
+    line-height: 14px;
+    width: 100%;
+    border-bottom: 1px solid ;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    height: 90px;
+}
+.checkout{
+    border: 1px solid #BDAE8E;
+    border-radius: 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+}
+.logo-div{
+    padding: 15px 0px 15px 0px;
+}
+.menu-bar{
+    line-height: 21px;
+}
+.right-menu{
+    width: 454px;
+}
+.left-menu{
+    width: 454px;
+}
+.logo-div{
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 89px;
+    padding-right: 89px;
+}
+a{
+    padding: 15px 0px 15px 0px;
+    line-height: 60px;
+    color: #BDAE8E;
+    text-decoration: none;
+}
+span{
+    padding: 0px 20px 0px 20px;
+    font-size: 18px;
+    line-height: 60px;
+    font-weight: 400px;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 3px;
+}
+ul{
+    height: 90px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    letter-spacing: normal;
+}
+li{
+    padding: 0px;
+}
+.slider{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #121212;
+    background: none;
+}
+.hero-img{
+    margin-top: 153px;
+    width: 677px;
+    height:732px;
+    height: auto;
+    zoom: 108%;
+    background: transparent;
+}
+.main-text{
+    color:#BEAF90;
+    font-family: 'Lato', sans-serif;  
+    color: #BEAF90;
+}
+.main-text h1{
+    font-size: 38px;
+    line-height: 44px;
+    letter-spacing: 3px;
+    font-weight: 400;
+}
+.text p{
+    margin-top: 15px;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;    
+    color: #626262;
+    /* z-index: 7; */
+    font-weight: 600;
+}
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+.card{
+    flex: 1 1 25%;         
+    max-width: 25%;       
+    height: 315px;
+    position: relative;
+    text-align: center;
+    line-height: 0px;
+}
+
+.card img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.decs{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 100%;
+    padding: 20px 15px 35px;
+    height: 126px;
+    width: 338px;
+    transition: transform 0.3s ease;
+}
+.subtitle{
+    font-size: 30px;
+    line-height: 30px;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    letter-spacing: 4px;
+    font-weight: 300;
+    color: aliceblue;
+}
+.title{
+    line-height: normal;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    font-size: 14px;
+    padding: 4px 8px;
+    background-color: #655637;
+    color: #FFFFFF;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: normal;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    display: inline-block;
+}
+.card .line {
+  width: 0;
+  height: 1px;
+  margin: 8px auto 0;
+  background: #FFFFFF;
+  transition: width 0.4s ease;
+}
+
+.card:hover .line{
+    width: 60%;
+}
+.card:hover .decs {
+    transform:  translateY(-12px);
+}
+
+.section-main{
+    width: 1351px;
+    height: 508px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    /* flex-direction: column; */
+    background-color: #121212;
+    background: transparent;
+    color: #626262;
+}
+.section-1{
+    height: 408px;
+    width: 610px;
+    margin-left: 66px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: normal;
+}
+.section-1-sub{
+    /* margin: 31px 49px; */
+    padding: 50px 8% 40px;
+    /* border:10px black; */
+}
+.s1-h3{
+    font-size:30px;
+    margin-bottom: 30px;
+    line-height:32px;
+    font-weight: 300;
+    letter-spacing:4px;
+    font-family: 'Lato', sans-serif;
+}
+.no-line{
+    margin: 0 auto 30px auto;
+    background: none;
+    color: transparent;
+    border: none;
+}
+p{
+    margin: 0 0 15px;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+    letter-spacing: normal;
+    color:#626262;
+}
+.section-img{
+    height: 101px;
+}
+.section-2{
+    height: 408px;
+    width: 610px;
+    margin-right: 66px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: normal;
+}
+.section-2-sub{
+    padding: 40px 8%;
+}
+.s2-h3{
+    margin-bottom: 30px;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 30px;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 300;
+    letter-spacing: 4px;
+}
+.btn-2{
+    background-color: #121212;
+    background: transparent;
+    color: #655637;
+    border-radius: 3px;
+    padding: 16px 20px;
+    letter-spacing: normal;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: 0.4s ease-in;
+}
+.btn-2:hover{
+    background-color: #655637;
+    color: #121212;
+}
+.hero {
+  position: relative;
+  height: 385px;
+  background: url("./assets/home_jeweller_parallax_bg.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size:140% ;
+}
+
+.hero-text {
+  position: absolute;
+}
+
+.hero-text h2 {
+  font-size: 35px;
+  line-height: 35px;
+  font-weight: 200;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0 0 10px;
+  letter-spacing: 4px;
+  color: #BEAF90;
+  
+}
+.main-container{
+    height: 282px;
+    background-color: #121212;
+    background: transparent;
+    text-align: center;
+}
+.info-container{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* bottom: 30px; */
+    text-align: center;
+    line-height: 21px;
+}
+.logo-container{
+    padding-top: 30px;
+}
+.info-details{
+    margin-top: 30px;
+    text-align: center;
+    color: #4b4b4b;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.footer{
+    height: 111px;
+    background-color: #121212;
+    background: transparent;
+    color: #626262;
+    border-top: 1px solid #4b4b4b;
+    text-align: center;
+    line-height: 21px;
+    padding-bottom: 20px;
+}
+.footer-container{
+    line-height: 21px;
+    font-size: 14px;
+    font-size: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
