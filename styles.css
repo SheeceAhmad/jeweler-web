@@ -112,7 +112,6 @@ li{
     letter-spacing: 1px;
     font-family: 'Lato', sans-serif;    
     color: #626262;
-    /* z-index: 7; */
     font-weight: 600;
 }
 .card-container{
@@ -190,9 +189,7 @@ li{
     width: 1351px;
     height: 508px;
     display: flex;
-    /* align-items: center; */
     justify-content: center;
-    /* flex-direction: column; */
     background-color: #121212;
     background: transparent;
     color: #626262;
@@ -207,9 +204,7 @@ li{
     line-height: normal;
 }
 .section-1-sub{
-    /* margin: 31px 49px; */
     padding: 50px 8% 40px;
-    /* border:10px black; */
 }
 .s1-h3{
     font-size:30px;
@@ -308,7 +303,6 @@ p{
 .info-container{
     padding-top: 30px;
     padding-bottom: 30px;
-    /* bottom: 30px; */
     text-align: center;
     line-height: 21px;
 }
@@ -339,4 +333,111 @@ p{
     font-size: 14px;
     font-size: 400;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/*  */
+
+/* ======== 1200px ======== */
+@media (max-width: 1200px) {
+  .menu-bar ul {
+    gap: 18px;
+  }
+  .menu-bar ul li a {
+    font-size: 19px;
+  }
+  .menu-toggle {
+    font-size: 27px;
+    left: 28px;
+  }
+}
+
+/* ======== 1100px ======== */
+@media (max-width: 1100px) {
+  .menu-bar ul {
+    gap: 16px;
+  }
+  .menu-bar ul li a {
+    font-size: 18px;
+  }
+  .menu-toggle {
+    font-size: 26px;
+  }
+}
+
+/* ======== 1000px ======== */
+@media (max-width: 1000px) {
+  .menu-bar ul {
+    gap: 14px;
+  }
+  .menu-bar ul li a {
+    font-size: 17px;
+  }
+  .menu-toggle {
+    font-size: 25px;
+  }
+}
+
+/* ======== 900px (Switch to Drawer) ======== */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-bar ul {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: #121212;
+    justify-content: flex-start;
+    padding-top: 120px;
+    gap: 25px;
+    transition: left 0.3s ease;
+    border-right: 1px solid #4b4b4b;
+  }
+
+  .menu-bar.active ul {
+    left: 0;
+  }
+
+  .logo-div {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .header {
+    justify-content: center;
+    position: sticky;
+    top: 0;
+  }
+
+  .menu-bar ul li a {
+    font-size: 18px;
+    line-height: 40px;
+    color: #BDAE8E;
+  }
+
+  .menu-bar ul li a:hover {
+    color: #fff;
+  }
+}
+
+/* ======== 600px ======== */
+@media (max-width: 600px) {
+  .menu-bar ul {
+    width: 200px;
+    padding-top: 100px;
+    gap: 22px;
+  }
+  .menu-bar ul li a {
+    font-size: 16px;
+    line-height: 36px;
+  }
+  .menu-toggle {
+    font-size: 24px;
+    left: 20px;
+  }
 }
