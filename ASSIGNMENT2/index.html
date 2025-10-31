@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <title>MyNotes</title>
+</head>
+<body>
+    <div class="container">
+        <form id="noteForm" class="createForm">
+            <input type="hidden" id="noteId">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter note title" required aria-describedby="imptitle"/>
+                <div id="imptitle" class="form-text">Title must be fun</div>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Content</label>
+                <textarea class="form-control" id="body" rows="3" placeholder="Enter note content" aria-describedby="detail"></textarea>
+                <div id="detail" class="form-text">Details please.</div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="saveBtn">Add Note</button>
+            <button type="button" class="btn btn-secondary d-none" id="cancelBtn">Cancel</button>
+        </form>
+
+        <div id="notesList" class="row g-4"></div>
+
+        <div id="loading" class="text-center my-3" style="display:none;">
+        <div class="spinner-border" role="status"></div>
+        <p>Loading...</p>
+        </div>
+
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./jcrud.js"></script>
+
+</body>
+</html>
