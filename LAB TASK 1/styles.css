@@ -530,6 +530,12 @@ p{
   color: #626262;
   letter-spacing: 1px;
 }
+.stars {
+  color: #BDAE8E;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
 
 .view-more {
   margin-top: 40px;
