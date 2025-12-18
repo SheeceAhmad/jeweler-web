@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Jewelry Products</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div class="product-heading">
+        <h1>Products</h1>
+    </div>
+    <div class="filter-section">
+    <ul class="filter-menu">
+        <li><a href="/products" class="<%= currentCategory === 'all' ? 'active-filter' : '' %>">ALL PIECES</a></li>
+        <li><a href="/products?category=Rings" class="<%= currentCategory === 'Rings' ? 'active-filter' : '' %>">RINGS</a></li>
+        <li><a href="/products?category=Necklaces" class="<%= currentCategory === 'Necklaces' ? 'active-filter' : '' %>">NECKLACES</a></li>
+        <li><a href="/products?category=Earrings" class="<%= currentCategory === 'Earrings' ? 'active-filter' : '' %>">EARRINGS</a></li>
+        <li><a href="/products?category=Bracelets" class="<%= currentCategory === 'Bracelets' ? 'active-filter' : '' %>">BRACELETS</a></li>
+    </ul>
+    </div>
+    <div class="product-container">
+        <% products.forEach(product => { %>
+            <div class="card product-item">
+                <a href="/products/<%= product._id %>" class="product-card-link">
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                    <div class="decs">
+                        <div class="title"><%= product.category.toUpperCase() %></div>
+                        <h2 class="subtitle"><%= product.name %></h2>
+                        <div class="line"></div>
+                        <p class="price">$<%= product.price %></p>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+    </div>
+
+    <div class="pagination" style="text-align: center; padding: 40px 0;">
+    <% if (currentPage > 1) { %>
+        <a href="?page=<%- currentPage - 1 %>&category=<%- currentCategory %>" class="btn-2">Previous</a>
+    <% } %>
+
+    <span style="color: #BEAF90;">Page <%= currentPage %> of <%= totalPages %></span>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="?page=<%- currentPage + 1 %>&category=<%- currentCategory %>" class="btn-2">Next</a>
+    <% } %>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

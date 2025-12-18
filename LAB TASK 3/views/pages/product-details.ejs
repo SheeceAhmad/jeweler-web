@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.name %> | Jeweller</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body > <%- include('../partials/header.ejs') %>
+
+
+<main class="product-page-container">
+    <div class="product-wrapper-inner">
+        
+        <div class="product-visual">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+        </div>
+
+        <div class="product-details-content">
+            <span class="category-label"><%= product.category %></span>
+            <h1><%= product.name %></h1>
+            <div class="gold-separator"></div>
+            
+            <div class="product-price">$<%= product.price %></div>
+            
+            <p class="product-description">
+                Experience the pinnacle of fine jewelry. This piece is meticulously 
+                handcrafted using only the finest materials, ensuring a timeless 
+                addition to your personal collection.
+            </p>
+
+            <div class="actions-group">
+                <div class="qty-stepper">
+                    <button type="button" onclick="changeQty(-1)">-</button>
+                    <input type="number" id="qty-input" value="1" readonly>
+                    <button type="button" onclick="changeQty(1)">+</button>
+                </div>
+
+                <button type="button" class="btn-2" onclick="addToCartLogic()" style="flex-grow: 1; height: 55px;">
+                    ADD TO COLLECTION
+                </button>
+            </div>
+
+            <a href="/shop" style="color: #555; text-decoration: none; font-size: 11px; letter-spacing: 2px;">
+                &larr; BACK TO SHOP
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<%- include('../partials/footer.ejs') %>
+
+<script>
+    function changeQty(v) {
+        let i = document.getElementById('qty-input');
+        let n = parseInt(i.value) + v;
+        if(n > 0) i.value = n;
+    }
+
+    function addToCartLogic() {
+        const qty = parseInt(document.getElementById('qty-input').value);
+        const item = {
+            id: '<%= product._id %>',
+            name: '<%= product.name %>',
+            price: <%= product.price %>,
+            image: '<%= product.image %>',
+            quantity: qty
+        };
+
+        let cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+        const idx = cart.findIndex(c => c.id === item.id);
+        if(idx > -1) cart[idx].quantity += qty;
+        else cart.push(item);
+
+        localStorage.setItem('jeweller_cart', JSON.stringify(cart));
+        if (typeof updateBasketUI === 'function') updateBasketUI();
+        alert("Jewelry added to your basket.");
+    }
+</script>
+</body>
+</html>

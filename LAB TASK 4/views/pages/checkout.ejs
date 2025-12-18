@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | JEWELER</title>
+    <link rel="stylesheet" href="/styles/checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="checkout-header">
+        <div class="logo-div">
+            <img src="/assets/logo.png" alt="logo">
+        </div>
+        <div class="secure-label">
+            <span>SECURE CHECKOUT</span>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-grid">
+            
+            <section class="checkout-form-section">
+                <h1 class="main-title">SHIPPING & PAYMENT</h1>
+                
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label>FULL NAME</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>EMAIL</label>
+                            <input type="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>PHONE</label>
+                            <input type="tel" placeholder="+1 234 567 890" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SHIPPING ADDRESS</label>
+                        <input type="text" placeholder="Street Address" required>
+                    </div>
+
+                    <div class="payment-selection">
+                        <label class="section-label">PAYMENT METHOD</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="pay" checked>
+                                <span>CREDIT CARD</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="pay">
+                                <span>CASH ON DELIVERY</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label>CARD NUMBER</label>
+                            <input type="text" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>EXPIRY</label>
+                                <input type="text" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="password" placeholder="***">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="place-order-btn">PLACE ORDER</button>
+                </form>
+            </section>
+
+            <aside class="order-summary">
+                <h2 class="summary-title">YOUR SELECTION</h2>
+                <div class="summary-list">
+                    <div class="item">
+                        <span>Diamond Studs x 1</span>
+                        <span>$450.00</span>
+                    </div>
+                    <div class="item">
+                        <span>Gold Band x 1</span>
+                        <span>$800.00</span>
+                    </div>
+                </div>
+                
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>SUBTOTAL</span>
+                        <span>$1,250.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>SHIPPING</span>
+                        <span>FREE</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>TOTAL</span>
+                        <span>$1,250.00</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <div style="margin-bottom: 20px;">
+        <a href="/products" style="text-decoration: none; color: #888; font-size: 11px; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; transition: 0.3s;" onmouseover="this.style.color='#BEAF90'" onmouseout="this.style.color='#888'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            BACK TO SHOP
+        </a>
+    </div>
+
+    <footer class="checkout-footer-simple">
+        <p>&copy; 2025 JEWELER LUXURY COLLECTIVE. ALL RIGHTS RESERVED.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCheckout();
+        });
+        
+        function displayCheckout() {
+            const cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+            const listContainer = document.querySelector('.summary-list');
+            const subtotalLabel = document.querySelector('.total-row span:last-child');
+            const totalLabel = document.querySelector('.grand-total span:last-child');
+            
+            if (cart.length === 0) {
+                listContainer.innerHTML = '<div class="item"><span>Your basket is empty</span></div>';
+                subtotalLabel.innerText = "$0.00";
+                totalLabel.innerText = "$0.00";
+                return;
+            }
+        
+            let total = 0;
+            
+            // Generate the HTML with Image and Counter
+            const html = cart.map((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border: 1px solid #333;">
+                            <div>
+                                <span style="display: block; font-size: 13px;">${item.name}</span>
+                                <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                                    <button onclick="updateQty(${index}, -1)" style="background: none; border: 1px solid #444; color: #BEAF90; cursor: pointer; width: 20px;">-</button>
+                                    <span style="font-size: 12px;">${item.quantity}</span>
+                                    <button onclick="updateQty(${index}, 1)" style="background: none; border: 1px solid #444; color: #BEAF90; cursor: pointer; width: 20px;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <span>$${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+        
+            listContainer.innerHTML = html;
+            subtotalLabel.innerText = `$${total.toFixed(2)}`;
+            totalLabel.innerText = `$${total.toFixed(2)}`;
+        }
+        
+        // Function to handle the increase/decrease
+        function updateQty(index, change) {
+            let cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+            
+            cart[index].quantity += change;
+        
+            // Remove item if quantity becomes 0
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+        
+            localStorage.setItem('jeweller_cart', JSON.stringify(cart));
+            
+            // Refresh the UI
+            displayCheckout();
+            
+            // Sync the header badge if the function exists
+            if (typeof updateBasketUI === 'function') updateBasketUI();
+        }
+        </script>
+</body>
+</html>

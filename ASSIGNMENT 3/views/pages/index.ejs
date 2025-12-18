@@ -4,28 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 </head>
 <body>
-    <header class="header">
-        <div class="menu-bar">
-            <ul class="left-menu">
-                <li><a href="/"><span>JEWELER</span></a></li>
-                <li><a href="/"><span>OUR PRODUCTS</span></a></li>
-            </ul>
-        </div>
-        <div class="logo-div">
-            <img src="../assets/logo.png" alt="logo-img">
-        </div>
-        <div class="menu-bar">
-                <ul class="right-menu">
-                    <li><a href="/"><span>OUR SERVICES</span></a></li>
-                    <li><a href="/"><span>CONTACT</span></a></li>
-                </ul>
-        </div>
-        <div class="checkout"><a href="../ASSIGNMENT 1/checkout.html"><span>CHECKOUT</span></a></div>
-    </header>
+    <%- include('../partials/header.ejs') %>
+
     <div class="slider">
         <img class="hero-img" src="../assets/home_jeweller_slider1.png" alt="slider-img">
         <div class="main-text">
@@ -43,7 +30,6 @@
     </div>
     <div class="card-container">
         <div class="card">
-            <!-- <a href="#"></a> -->
          <img src="../assets/home_jeweller_products_1.jpg" alt="" >
           <div class="decs">
             <div class="title">PRODUCTS</div>
@@ -119,75 +105,7 @@
         WE KNOW HOW TO DO THE BEST JEWELLERY</h2>
     </div>
     </div>
-
-
-    <!-- TESTIMONIAL SECTION LAB EXAM MID-->
-    <div class="testimonials-section">
-        <h2 class="testimonial-heading">What Our Customers Say</h2>
-
-        <div class="testimonial-container">
-            <div class="testimonial-card">
-                <p class="testimonial-text">
-                    “Absolutely loved the craftsmanship! The details are stunning and the quality is unmatched.”
-                </p>
-                    <div class="stars">★★★★★</div>
-                    <div class="testimonial-author">
-                        <img src="https://placehold.co/100x100?text=User&radius=50" alt="Customer 1">
-                        <div>
-                        <h4>Sarah Khan</h4>
-                        <span>Islamabad, PK</span>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="testimonial-card">
-            <p class="testimonial-text">
-                “I ordered a custom gold ring — it arrived perfectly packaged and even more beautiful in person.”
-            </p>
-            <div class="stars">★★★★☆</div>
-            <div class="testimonial-author">
-                <img src="https://placehold.co/100x100?text=User&radius=50" alt="Customer 2">
-                <div>
-                <h4>Ali Ahmed</h4>
-                <span>Lahore, PK</span>
-                </div>
-            </div>
-            </div>
-
-        <div class="testimonial-card hidden">
-        <p class="testimonial-text">
-            “Their collection is elegant and timeless. I’ll definitely shop again for my sister’s wedding!”
-        </p>
-        <div class="stars">★★★★☆</div>
-        <div class="testimonial-author">
-            <img src="https://placehold.co/100x100?text=User&radius=50" alt="Customer 3">
-            <div>
-            <h4>Maria Noor</h4>
-            <span>Karachi, PK</span>
-            </div>
-        </div>
-        </div>
-
-        <div class="testimonial-card hidden">
-        <p class="testimonial-text">
-            “The customer support was amazing — they guided me perfectly for choosing the right necklace.”
-        </p>
-        <div class="stars">★★★☆☆</div>
-        <div class="testimonial-author">
-            <img src="https://placehold.co/100x100?text=User&radius=50" alt="Customer 4">
-            <div>
-            <h4>Hassan Raza</h4>
-            <span>Rawalpindi, PK</span>
-            </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="view-more">Hover to View More ↓</div>
-</div>
-
-
-<!-- SECTION END -->
+    
 
     <div class="main-container">
         <div class="info-container">
@@ -204,15 +122,6 @@
         </div>
     </div>
 
-    <div class="footer">
-        <div class="footer-container">
-            <div class="copyrights">
-                © 2025 Betheme by 
-                <a href="https://muffingroup.com" target="_blank">Muffin group</a>
-                | All Rights Reserved | Powered by
-                <a href="https://wordpress.org" target="_blank">WordPress</a>
-            </div>
-        </div>
-    </div>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

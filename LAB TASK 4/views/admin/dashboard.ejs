@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+    
+    <div class="admin-container">
+
+        <!-- TOP BAR -->
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <div class="header-actions">
+                <a href="/" class="back-btn">View Website</a>
+                <a href="/admin/logout" class="logout-btn">Logout</a>
+            </div>
+        </header>
+    
+        <!-- ADD PRODUCT CARD -->
+        <section class="card">
+            <h2>Add New Product</h2>
+    
+            <form class="add-form" onsubmit="addProduct(event)">
+                <input type="text" name="name" placeholder="Product name" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <input type="text" name="category" placeholder="Category">
+                <input type="text" name="image" placeholder="Image URL" required>
+                <button type="submit">➕ Add Product</button>
+            </form>
+        </section>
+    
+        <!-- PRODUCT LIST -->
+        <section class="card">
+            <h2>Product Listings</h2>
+    
+            <div class="product-grid">
+                <% products.forEach(product => { %>
+                    <div class="product-card" data-id="<%= product._id %>">
+
+                        <div class="product-image">
+                            <img src="<%= product.image %>" alt="product">
+                            <div class="img-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#fff" viewBox="0 0 24 24">
+                                    <path d="M12 5c-7 0-12 7-12 7s5 7 12 7 12-7 12-7-5-7-12-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    
+                        <div class="product-body">
+                            <input class="name-input" value="<%= product.name %>" disabled>
+                            <input class="price-input" type="number" value="<%= product.price %>" disabled>
+                            <input class="cat-input" value="<%= product.category %>" disabled>
+                        </div>
+                    
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="toggleEdit(this)">Edit</button>
+                            <button class="save-btn hidden" onclick="updateProduct('<%= product._id %>', this)">Save</button>
+                            <button class="delete-btn" onclick="deleteProduct('<%= product._id %>', this)">Delete</button>
+                        </div>
+                    </div>
+                    
+                <% }) %>
+            </div>
+        </section>
+    
+    </div>
+    
+<script>
+
+    // HELPER: Toggle input editability
+function toggleEdit(button) {
+    const card = button.closest('.product-card');
+    const inputs = card.querySelectorAll('input');
+    const saveBtn = card.querySelector('.save-btn');
+
+    inputs.forEach(input => input.disabled = !input.disabled);
+    button.classList.toggle('hidden');
+    saveBtn.classList.toggle('hidden');
+}
+
+// CREATE: Function for the "Add" form
+async function addProduct(event) {
+    event.preventDefault();
+    console.log("Add product clicked");
+
+    const form = event.target;
+
+    const data = {
+        name: form.name.value,
+        price: Number(form.price.value),
+        category: form.category.value,
+        image: form.image.value
+    };
+
+    const response = await fetch('/admin/product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        window.location.reload();
+    } else {
+        alert("Failed to add product");
+    }
+}
+
+
+// UPDATE: Function for individual cards
+async function updateProduct(id, button) {
+    const card = button.closest('.product-card');
+    const data = {
+        name: card.querySelector('.name-input').value,
+        price: card.querySelector('.price-input').value,
+        category: card.querySelector('.cat-input').value
+    };
+
+    const response = await fetch(`/admin/product/${id}`, {
+        method: 'POST', // Or 'PUT' if you update your backend
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        alert('Updated successfully');
+        toggleEdit(card.querySelector('.edit-btn'));
+    }
+}
+
+// DELETE: Function for individual cards
+async function deleteProduct(id, button) {
+    if (!confirm("Are you sure?")) return;
+
+    const response = await fetch(`/admin/product/delete/${id}`, {
+        method: 'POST' // Matches your current backend route
+    });
+
+    if (response.ok) {
+        button.closest('.product-card').remove(); // Remove from UI without reload
+    }
+}
+
+</script>
+
+</body>
+</html>
