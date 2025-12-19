@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const Product = require('./models/Product');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const methodOverride = require('method-override');
 
 const app = express();
-const methodOverride = require('method-override');
 
 app.use(methodOverride('_method'));
 
@@ -15,8 +15,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true })); // for form submissions
-app.use(express.json()); // for JSON requests (optional)
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json()); 
 
 app.use(session({
     secret: "adminsecret",

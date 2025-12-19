@@ -22,7 +22,7 @@ router.post("/product", isAdmin, async (req, res) => {
     try {
         console.log("BODY:", req.body);
         const newProduct = await Product.create(req.body);
-        res.status(201).json(newProduct); 
+        res.status(201).json(newProduct); // Return the object so frontend can use it
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

@@ -187,6 +187,84 @@
             // Sync the header badge if the function exists
             if (typeof updateBasketUI === 'function') updateBasketUI();
         }
+        let currentDiscount = 0; // store applied discount
+
+function applyDiscountLogic() {
+    const code = document.getElementById('couponInput').value.trim();
+    const cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+    let subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    if (code.toUpperCase() === 'SAVE10') {
+        currentDiscount = subtotal * 0.10;
+        alert("Success: 10% discount applied.");
+    } else {
+        currentDiscount = 0;
+        if(code !== "") alert("Invalid Coupon Code");
+    }
+
+    // Re-render checkout with discount
+    displayCheckout(cart, subtotal, currentDiscount, subtotal - currentDiscount);
+}
+
+// Update displayCheckout function to accept discount and total
+function displayCheckout(cart = null, subtotal = null, discount = null, total = null) {
+    cart = cart || JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+    const listContainer = document.querySelector('.summary-list');
+    const subtotalLabel = document.querySelector('.total-row span:first-child + span');
+    const totalLabel = document.querySelector('.grand-total span:last-child');
+
+    if (!cart.length) {
+        listContainer.innerHTML = '<div class="item"><span>Your basket is empty</span></div>';
+        subtotalLabel.innerText = "$0.00";
+        totalLabel.innerText = "$0.00";
+        return;
+    }
+
+    let calculatedSubtotal = 0;
+    const html = cart.map((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        calculatedSubtotal += itemTotal;
+        return `
+            <div class="item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border: 1px solid #333;">
+                    <div>
+                        <span style="display: block; font-size: 13px;">${item.name}</span>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                            <button onclick="updateQty(${index}, -1)" style="background: none; border: 1px solid #444; color: #BEAF90; cursor: pointer; width: 20px;">-</button>
+                            <span style="font-size: 12px;">${item.quantity}</span>
+                            <button onclick="updateQty(${index}, 1)" style="background: none; border: 1px solid #444; color: #BEAF90; cursor: pointer; width: 20px;">+</button>
+                        </div>
+                    </div>
+                </div>
+                <span>$${itemTotal.toFixed(2)}</span>
+            </div>
+        `;
+    }).join('');
+
+    listContainer.innerHTML = html;
+
+    subtotal = subtotal !== null ? subtotal : calculatedSubtotal;
+    discount = discount !== null ? discount : 0;
+    total = total !== null ? total : subtotal - discount;
+
+    subtotalLabel.innerText = `$${subtotal.toFixed(2)}`;
+
+    // Check if discount row exists, else create it
+    let discountRow = document.querySelector('#discount-row');
+    if (!discountRow) {
+        discountRow = document.createElement('div');
+        discountRow.className = 'total-row';
+        discountRow.id = 'discount-row';
+        discountRow.innerHTML = `<span>DISCOUNT</span><span id="discount-display">-$${discount.toFixed(2)}</span>`;
+        subtotalLabel.parentNode.parentNode.insertBefore(discountRow, totalLabel.parentNode);
+    } else {
+        document.getElementById('discount-display').innerText = `-$${discount.toFixed(2)}`;
+    }
+
+    totalLabel.innerText = `$${total.toFixed(2)}`;
+}
+
         </script>
 </body>
 </html>

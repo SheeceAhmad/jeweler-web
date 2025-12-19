@@ -1,0 +1,28 @@
+<header class="header" id="mainHeader">
+    <div class="menu-bar">
+        <ul class="left-menu">
+            <li><a href="/" class="<%= path === '/' ? 'active' : '' %>"><span>JEWELER</span></a></li>
+            <li><a href="/products" class="<%= path === '/products' ? 'active' : '' %>"><span>OUR PRODUCTS</span></a></li>
+            <!-- <li><a href="/my-orders" class="<%= path === '/my-orders' ? 'active' : '' %>"><span>MY ORDERS</span></a></li> -->
+        </ul>
+    </div>
+    <div class="logo-div">
+        <img src="/assets/logo.png" alt="logo-img" id="headerLogo">
+    </div>
+    <div class="menu-bar">
+        <ul class="right-menu">
+            <li><a href="/services" class="<%= path === '/services' ? 'active' : '' %>"><span>OUR SERVICES</span></a></li>
+            <li><a href="/contact" class="<%= path === '/contact' ? 'active' : '' %>"><span>CONTACT</span></a></li>
+        </ul>
+    </div>
+</header>
+<a href="/checkout" class="floating-basket">
+    <div class="basket-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+    </div>
+    <span class="basket-label">CHECKOUT</span>
+</a>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success | JEWELER</title>
+    <link rel="stylesheet" href="/styles/checkout.css">
+</head>
+<body>
+    <header class="checkout-header">
+        <div class="logo-div">
+            <img src="/assets/logo.png" alt="logo">
+        </div>
+        <div class="secure-label">
+            <span>ORDER SUCCESS</span>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-grid">
+            <section class="checkout-form-section">
+                <h1 class="main-title">THANK YOU FOR YOUR ORDER</h1>
+                <p>Your order has been placed successfully!</p>
+                <p><strong>Order ID:</strong> <%= order._id %></p>
+                <p><strong>Total:</strong> $<%= order.total.toFixed(2) %></p>
+                <p><strong>Status:</strong> <%= order.status %></p>
+                <a href="/products" style="color:#BEAF90;">Continue Shopping</a>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

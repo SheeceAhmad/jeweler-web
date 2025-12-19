@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | JEWELER</title>
+    <link rel="stylesheet" href="/styles/checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="checkout-header">
+    <div class="logo-div">
+        <img src="/assets/logo.png" alt="logo">
+    </div>
+    <div class="secure-label">
+        <span>SECURE CHECKOUT</span>
+    </div>
+</header>
+
+<main class="checkout-container">
+    <div class="checkout-grid">
+
+        <!-- Shipping & Payment Form -->
+        <section class="checkout-form-section">
+            <h1 class="main-title">SHIPPING & PAYMENT</h1>
+            
+            <form id="orderForm" method="POST" action="/order/place">
+                <div class="form-group">
+                    <label>FULL NAME</label>
+                    <input type="text" name="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>PHONE</label>
+                        <input type="tel" name="phone" placeholder="+1 234 567 890" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>SHIPPING ADDRESS</label>
+                    <input type="text" name="address" placeholder="Street Address" required>
+                </div>
+
+                <div class="payment-selection">
+                    <label class="section-label">PAYMENT METHOD</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="paymentMethod" value="Credit Card" checked>
+                            <span>CREDIT CARD</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="paymentMethod" value="Cash on Delivery">
+                            <span>CASH ON DELIVERY</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card-details">
+                    <div class="form-group">
+                        <label>CARD NUMBER</label>
+                        <input type="text" name="cardNumber" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>EXPIRY</label>
+                            <input type="text" name="cardExpiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="password" name="cardCvv" placeholder="***">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden fields -->
+                <input type="hidden" name="cartData" id="hiddenCartData">
+                <input type="hidden" name="coupon" id="hiddenCouponCode">
+
+                <!-- Promo Code Section -->
+                <div class="promo-section" style="margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
+                    <label style="font-size: 10px; letter-spacing: 2px; color: #888;">PROMO CODE</label>
+                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                        <input type="text" id="couponInput" placeholder="SAVE10" style="background: transparent; border: 1px solid #333; color: white; padding: 10px; flex-grow: 1; font-family: 'Lato';">
+                        <button type="button" id="applyCouponBtn" style="background: #BEAF90; border: none; padding: 0 20px; cursor: pointer; color: black; font-weight: bold; font-size: 11px;">APPLY</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">PLACE ORDER</button>
+            </form>
+        </section>
+
+        <!-- Order Summary -->
+        <aside class="order-summary">
+            <h2 class="summary-title">YOUR SELECTION</h2>
+            <div class="summary-list"></div>
+            
+            <div class="summary-totals">
+                <div class="total-row">
+                    <span>SUBTOTAL</span>
+                    <span id="subtotal-display">$0.00</span>
+                </div>
+                <div class="total-row" id="discount-row" style="display:none;">
+                    <span>DISCOUNT</span>
+                    <span id="discount-display">-$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>SHIPPING</span>
+                    <span>FREE</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>TOTAL</span>
+                    <span id="total-display">$0.00</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer class="checkout-footer-simple">
+    <p>&copy; 2025 JEWELER LUXURY COLLECTIVE. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<script>
+    let appliedCoupon = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        displayCheckout();
+    });
+
+    // Apply promo code
+    document.getElementById('applyCouponBtn').addEventListener('click', () => {
+        const code = document.getElementById('couponInput').value.trim();
+        const subtotal = calculateSubtotal();
+        if(code === 'SAVE10') {
+            appliedCoupon = code;
+            const discount = subtotal * 0.10;
+            const total = subtotal - discount;
+            document.getElementById('discount-row').style.display = 'flex';
+            document.getElementById('discount-display').innerText = `-$${discount.toFixed(2)}`;
+            document.getElementById('total-display').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('hiddenCouponCode').value = code;
+            alert("10% discount applied!");
+        } else {
+            appliedCoupon = '';
+            document.getElementById('discount-row').style.display = 'none';
+            document.getElementById('total-display').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('hiddenCouponCode').value = '';
+            alert("Invalid coupon code");
+        }
+    });
+
+    function calculateSubtotal() {
+        const cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+        return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    }
+
+    function displayCheckout() {
+        const cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+        const listContainer = document.querySelector('.summary-list');
+        let subtotal = 0;
+
+        if(cart.length === 0){
+            listContainer.innerHTML = '<div class="item"><span>Your basket is empty</span></div>';
+            document.getElementById('subtotal-display').innerText = "$0.00";
+            document.getElementById('total-display').innerText = "$0.00";
+            return;
+        }
+
+        const html = cart.map((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            return `
+                <div class="item" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;border-bottom:1px solid #222;padding-bottom:10px;">
+                    <div style="display:flex;align-items:center;gap:15px;">
+                        <img src="${item.image}" alt="${item.name}" style="width:50px;height:50px;object-fit:cover;border:1px solid #333;">
+                        <div>
+                            <span style="display:block;font-size:13px;">${item.name}</span>
+                            <div style="display:flex;align-items:center;gap:10px;margin-top:5px;">
+                                <button onclick="updateQty(${index},-1)" style="background:none;border:1px solid #444;color:#BEAF90;cursor:pointer;width:20px;">-</button>
+                                <span style="font-size:12px;">${item.quantity}</span>
+                                <button onclick="updateQty(${index},1)" style="background:none;border:1px solid #444;color:#BEAF90;cursor:pointer;width:20px;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <span>$${itemTotal.toFixed(2)}</span>
+                </div>
+            `;
+        }).join('');
+
+        listContainer.innerHTML = html;
+        document.getElementById('subtotal-display').innerText = `$${subtotal.toFixed(2)}`;
+
+        // Update total if coupon applied
+        if(appliedCoupon === 'SAVE10'){
+            const discount = subtotal * 0.10;
+            document.getElementById('discount-row').style.display = 'flex';
+            document.getElementById('discount-display').innerText = `-$${discount.toFixed(2)}`;
+            document.getElementById('total-display').innerText = `$${(subtotal - discount).toFixed(2)}`;
+        } else {
+            document.getElementById('discount-row').style.display = 'none';
+            document.getElementById('total-display').innerText = `$${subtotal.toFixed(2)}`;
+        }
+    }
+
+    function updateQty(index, change) {
+        let cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+        cart[index].quantity += change;
+        if(cart[index].quantity <= 0) cart.splice(index,1);
+        localStorage.setItem('jeweller_cart', JSON.stringify(cart));
+        displayCheckout();
+    }
+
+    // Fill hidden fields before submitting
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+        const cart = JSON.parse(localStorage.getItem('jeweller_cart')) || [];
+        if(cart.length === 0){ e.preventDefault(); alert("Cart is empty"); return; }
+        document.getElementById('hiddenCartData').value = JSON.stringify(cart);
+        document.getElementById('hiddenCouponCode').value = appliedCoupon;
+    });
+</script>
+
+</body>
+</html>

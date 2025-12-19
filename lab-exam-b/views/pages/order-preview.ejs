@@ -1,0 +1,39 @@
+<h1>Order Preview</h1>
+<div>
+    <h2>Shipping Info</h2>
+    <p>Name: <%= order.fullName %></p>
+    <p>Email: <%= order.email %></p>
+    <p>Phone: <%= order.phone %></p>
+    <p>Address: <%= order.address %></p>
+    <p>Payment: <%= order.paymentMethod %></p>
+</div>
+
+<div>
+    <h2>Order Items</h2>
+    <ul>
+        <% order.cart.forEach(item => { %>
+            <li><%= item.name %> x <%= item.quantity %> - $<%= (item.price * item.quantity).toFixed(2) %></li>
+        <% }) %>
+    </ul>
+</div>
+
+<div>
+    <p>Subtotal: $<%= order.subtotal.toFixed(2) %></p>
+    <% if(order.discount > 0) { %>
+        <p>Discount: -$<%= order.discount.toFixed(2) %> (<%= order.coupon %>)</p>
+    <% } %>
+    <p>Total: $<%= order.total.toFixed(2) %></p>
+</div>
+
+<form action="/order/confirm" method="POST">
+    <input type="hidden" name="fullName" value="<%= order.fullName %>">
+    <input type="hidden" name="email" value="<%= order.email %>">
+    <input type="hidden" name="phone" value="<%= order.phone %>">
+    <input type="hidden" name="address" value="<%= order.address %>">
+    <input type="hidden" name="paymentMethod" value="<%= order.paymentMethod %>">
+    <input type="hidden" name="cartData" value='<%= JSON.stringify(order.cart) %>'>
+    <input type="hidden" name="total" value="<%= order.total %>">
+    <input type="hidden" name="discount" value="<%= order.discount %>">
+    <input type="hidden" name="coupon" value="<%= order.coupon %>">
+    <button type="submit">Place Order</button>
+</form>

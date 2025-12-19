@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main class="contact-outer-container">
+        <h2 class="contact-main-title">WE INVITE YOU TO VISIT OUR STORE</h2>
+    
+        <div class="contact-flex-wrapper">
+            
+            <div class="contact-column store-img-col">
+                <img src="/path/to/your/image.jpg" alt="Atelier Interior">
+            </div>
+    
+            <div class="contact-column form-col">
+                <h3 class="col-title">SEND US A MESSAGE</h3>
+                <div class="sub-line"></div>
+                
+                <form class="legacy-form">
+                    <div class="input-row">
+                        <input type="text" placeholder="Your name">
+                        <input type="email" placeholder="Your e-mail">
+                    </div>
+                    <input type="text" placeholder="Subject" class="full-input">
+                    <textarea placeholder="Message" rows="8"></textarea>
+                </form>
+            </div>
+    
+            <div class="contact-column address-col">
+                <h3 class="col-title">OUR ADDRESS</h3>
+                <div class="sub-line"></div>
+                
+                <p class="address-text">
+                    Adipiscing turpis. Aenean ligula nibh, molestie id viv viverra ipsum ac eros tristique dignissim. Donec aliquam velit vitae mi dictum. Aenean ligula:
+                </p>
+                
+                <div class="contact-details">
+                    <p>Mail: <span class="gold-text">noreply@envato.com</span></p>
+                    <p>Tel. <span class="gold-text">+61 (0) 7 9180 3458</span></p>
+                </div>
+    
+                <div class="social-section">
+                    <div class="sub-line center-line"></div>
+                    <h4 class="social-title">YOU CAN ALSO FIND US HERE:</h4>
+                    <div class="icons">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
